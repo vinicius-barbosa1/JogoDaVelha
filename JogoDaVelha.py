@@ -29,19 +29,21 @@ def jogadaPlayer():
     global jogadas
     global quemJoga
     global maxJogadas
-    if quemJoga == 1 and jogadas<maxJogadas:
-        linha = int(input("Linha..:"))
-        coluna = int(input("Coluna:"))
-        while velha[linha][coluna] != " ":
+    try:
+        if quemJoga == 1 and jogadas<maxJogadas:
             linha = int(input("Linha..:"))
             coluna = int(input("Coluna:"))
-        try:
-            velha[linha][coluna] = "O"
-            quemJoga = 2
-            jogadas += 1
-        except:
-            print("Linha e/ou coluna inválida")
-
+            while velha[linha][coluna] != " ":
+                linha = int(input("Linha..:"))
+                coluna = int(input("Coluna:"))
+            try:
+                velha[linha][coluna] = "O"
+                quemJoga = 2
+                jogadas += 1
+            except:
+                print("Linha e/ou coluna inválida")
+    except:
+        print("Index não existe!")
 
 def jogadaCPU():
     global jogadas
@@ -125,21 +127,25 @@ def jogo():
         jogadaPlayer()
 
         if verificarVitoria():
-            print("Parabéns, você venceu!") 
+            interface()
+            print(Fore.GREEN ,"Parabéns, você venceu!", Fore.RESET) 
             jogarNovamenteFuncao()
             break
 
         elif verificarEmpate():
+            interface()
             print("DEU empate")
             jogarNovamenteFuncao()
             break
 
         jogadaCPU()
         if verificarVitoria():
-            print("O computador venceu!") 
+            interface()
+            print(Fore.RED ,"O computador venceu!", Fore.RESET) 
             jogarNovamenteFuncao()
             break
         elif verificarEmpate():
+            interface()
             print("DEU empate")
             jogarNovamenteFuncao()
             break
